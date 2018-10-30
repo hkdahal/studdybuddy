@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Grid, Image, Icon, Modal, Header, Card, Segment } from 'semantic-ui-react'
+import { Button, Modal, Card, Segment, Header } from 'semantic-ui-react'
 
 import UserCard from './UserCard'
 
@@ -11,19 +11,24 @@ export default class Group extends Component {
     ))
     return (
       <Segment raised>
-        { current && <React.Fragment>
-          <Modal
-            trigger={<Button floated='right' color='red'>Leave Group</Button>}
-            header='Are you sure you want to leave this group?'
-            content='Your group members will be notified if you leave.'
-            actions={['No', { key: 'yes', content: 'Yes', negative: true }]}
-          />
-          <Button floated='right' color='green'>Email Group</Button>
-        </React.Fragment>}
-        <h3>{name}</h3>
+        <Header>{name}</Header>
+        { current && (
+          <React.Fragment>
+            <Modal
+              trigger={<Button floated='right' color='red'>Leave Group</Button>}
+              header='Are you sure you want to leave this group?'
+              content='Your group members will be notified if you leave.'
+              actions={['No', { key: 'yes', content: 'Yes', negative: true }]}
+            />
+            <Button color='green'>Email Group</Button>
+          </React.Fragment>
+        )}
+        <br/>
+        <br/>
         <Card.Group itemsPerRow={5}>
           {userCards}
         </Card.Group>
+
       </Segment>
     )
   }

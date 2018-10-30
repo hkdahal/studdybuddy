@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Image, Menu, Segment } from 'semantic-ui-react'
 import { Link } from "react-router-dom"
 
-import MyGroups from './MyGroups'
-
 export default class MenuExampleInvertedSecondary extends Component {
 
   render() {

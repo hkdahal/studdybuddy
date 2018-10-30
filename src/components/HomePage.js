@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Button, Icon } from 'semantic-ui-react'
+import React, { Component } from 'react'
 import NavBar from './NavBar'
 
 import Group from './Group'
