@@ -23,10 +23,6 @@ export default class HomePage extends Component {
       <React.Fragment>
         <NavBar page='home'/>
         <div style={divStyle}>
-          <Button color='purple'>Become a Tutor!</Button>
-          <Button secondary><Icon name='add square' />Add Course</Button>
-        </div>
-        <div style={divStyle}>
           {groupComponents}
         </div>
       </React.Fragment>

@@ -60,7 +60,6 @@ export default class UserCard extends Component {
                       <Icon name='checkmark' /> Confirm
                     </Button>
                   </Modal.Actions>
-
               </Modal>
             </div>
           </Card.Content>
