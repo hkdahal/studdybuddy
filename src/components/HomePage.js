@@ -21,7 +21,7 @@ export default class HomePage extends Component {
     }
     return (
       <React.Fragment>
-        <NavBar/>
+        <NavBar page='home'/>
         <div style={divStyle}>
           <Button color='purple'>Become a Tutor!</Button>
           <Button secondary><Icon name='add square' />Add Course</Button>
