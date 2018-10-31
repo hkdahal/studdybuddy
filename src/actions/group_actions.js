@@ -1,4 +1,4 @@
-export const LEAVE_GROUP = 'LEAVE_GROUP'
+import { LEAVE_GROUP } from '../constants'
 
 export const leaveGroup = (groupId) => {
   return dispatch => {

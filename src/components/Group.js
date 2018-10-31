@@ -12,7 +12,7 @@ export default class Group extends Component {
   render() {
     const { name, users, current } = this.props
     const userCards = users.map(user => (
-      <UserCard {...user} group={name} key={user.id} currentGroup={current} />
+      <UserCard {...user} group={name} key={user.id} currentGroup={current || false} />
     ))
     return (
       <Segment raised>
