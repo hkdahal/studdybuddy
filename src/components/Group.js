@@ -4,6 +4,11 @@ import { Button, Modal, Card, Segment, Header } from 'semantic-ui-react'
 import UserCard from './UserCard'
 
 export default class Group extends Component {
+
+  onLeaveGroup = () => {
+    this.props.onLeaveGroup(this.props.id)
+  }
+
   render() {
     const { name, users, current } = this.props
     const userCards = users.map(user => (
@@ -18,7 +23,7 @@ export default class Group extends Component {
               trigger={<Button floated='right' color='red'>Leave Group</Button>}
               header='Are you sure you want to leave this group?'
               content='Your group members will be notified if you leave.'
-              actions={['No', { key: 'yes', content: 'Yes', negative: true }]}
+              actions={['No', { key: 'yes', content: 'Yes', negative: true, onClick: this.onLeaveGroup }]}
             />
             <Button color='green'>Email Group</Button>
           </React.Fragment>

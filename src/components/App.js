@@ -9,7 +9,7 @@ import store from '../config/store'
 
 import HomePage from './HomePage'
 import About from './About'
-import MyGroups from './MyGroups'
+import MyGroups from '../containers/MyGroups'
 
 class Root extends Component {
   render() {
