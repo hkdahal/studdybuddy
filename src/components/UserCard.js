@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Header, Icon, Button, Segment, Card, Grid, Image, Modal } from 'semantic-ui-react'
 
+import { randomPic, LIKED, DISLIKED, CONFIRMED } from '../constants'
+
 export default class UserCard extends Component {
 
   state = {
@@ -11,28 +13,44 @@ export default class UserCard extends Component {
 
   hideModal = () => this.setState({ modalOpen: false })
 
+  onConnectWithUser = () => {
+    this.props.onConnectUser({ groupId: this.props.groupId, userId: this.props.id })
+    this.hideModal()
+  }
+
+  onDislikeUser = () => {
+    this.props.onDislikeUser({ groupId: this.props.groupId, userId: this.props.id })
+    this.hideModal()
+  }
+
   render() {
-    const { name, bio, details, group, currentGroup } = this.props
+    const { name, bio, details, group, currentGroup, status } = this.props
+    const highlightCard = { [LIKED]: 'green', [DISLIKED]: 'red' }
+    if (currentGroup && status !== CONFIRMED) {
+      return null
+    } else if (!currentGroup && status === CONFIRMED) {
+      return null
+    }
     return (
-      <Card raised>
-        <Image onClick={this.showModal} src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
+      <Card raised={status !==DISLIKED} color={highlightCard[status]}>
+        <Image onClick={this.showModal} src={randomPic([this.props.id])} />
         <Card.Content>
-          <Card.Header>{name}</Card.Header>
+          <Card.Header><Header color={highlightCard[status]}>{name}</Header></Card.Header>
           <Card.Meta>
             <span>{details}</span>
           </Card.Meta>
-          <Card.Description>{bio}</Card.Description>
+          <Card.Description color='black'>{bio}</Card.Description>
         </Card.Content>
         {
           !currentGroup && <Card.Content extra>
             <div className='ui two buttons'>
-              <Button icon='x' color='red'/>
+              <Button icon='x' color='red'disabled={status ===DISLIKED} onClick={this.showModal}/>
               <Modal
-                trigger={<Button icon='check' color='green' onClick={this.showModal}/>}
+                trigger={<Button icon='check' color='green' disabled={status ===LIKED} onClick={this.showModal}/>}
                 open={this.state.modalOpen}
                 onClose={this.hideModal}
                 >
-                  <Header>{name} + "'s Profile"</Header>
+                  <Header>Connect with {name} for {this.props.group} ?</Header>
                   <Modal.Content>
                     <div style={{ padding: 10 }}>
                       <Grid>
@@ -41,7 +59,7 @@ export default class UserCard extends Component {
                         </Grid.Column>
                         <Grid.Column width={8}>
                           <Segment>
-                            <h3>{name}</h3>
+                            <Header>{name}</Header>
                             <h5>Course: {group}</h5>
                             {details}
                             <br/>
@@ -53,10 +71,13 @@ export default class UserCard extends Component {
                   </Modal.Content>
 
                   <Modal.Actions>
-                    <Button color='red' onClick={this.hideModal} inverted>
+                    <Button color='grey' onClick={this.hideModal}>
+                      Cancel
+                    </Button>
+                    <Button color='red' onClick={this.onDislikeUser} inverted>
                       <Icon name='x' /> Nope
                     </Button>
-                    <Button color='green' onClick={this.hideModal} inverted>
+                    <Button color='green' onClick={this.onConnectWithUser} inverted>
                       <Icon name='checkmark' /> Confirm
                     </Button>
                   </Modal.Actions>
