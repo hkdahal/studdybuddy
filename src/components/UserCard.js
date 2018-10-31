@@ -25,9 +25,9 @@ export default class UserCard extends Component {
 
   cardBorder = () => {
     if (this.props.status === LIKED) {
-      return { borderStyle: 'solid', borderWidth: 1.5, borderColor: 'green'}
+      return { borderStyle: 'solid', borderWidth: 2, borderColor: 'green'}
     } else if (this.props.status === DISLIKED) {
-      return { borderStyle: 'solid', borderWidth: 1.5, borderColor: 'red'}
+      return { borderStyle: 'solid', borderWidth: 2, borderColor: 'red'}
     }
   }
 
@@ -66,13 +66,13 @@ export default class UserCard extends Component {
                         <div style={{ padding: 10 }}>
                           <Grid>
                             <Grid.Column width={8}>
-                              <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' size='medium' />
+                              <Image src={randomPic([this.props.id])} size='medium' />
                             </Grid.Column>
                             <Grid.Column width={8}>
                               <Segment>
                                 <Header>{name}</Header>
                                 <h5>Course: {group}</h5>
-                                {details}
+                                <span style={{ fontStyle: 'italic'}}>{details}</span>
                                 <br/>
                                 {bio}
                               </Segment>

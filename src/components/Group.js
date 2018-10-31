@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal, Card, Segment, Header } from 'semantic-ui-react'
+import { Button, Divider, Modal, Card, Segment, Header } from 'semantic-ui-react'
 
 import UserCard from '../containers/UserCard'
 
@@ -27,14 +27,12 @@ export default class Group extends Component {
               actions={['No', { key: 'yes', content: 'Yes', negative: true, onClick: this.onLeaveGroup }]}
             />
             <a href={`mailto:${email}`}><Button color='green'>Email Group</Button></a>
+            <Divider/>
           </React.Fragment>
         )}
-        <br/>
-        <br/>
         <Card.Group itemsPerRow={5}>
           {userCards}
         </Card.Group>
-
       </Segment>
     )
   }
