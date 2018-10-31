@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from './NavBar'
 
-import { DISLIKED, CONFIRMED, NOT_DECIDED } from '../constants'
-
 import Group from './Group'
 
 export default class HomePage extends Component {
