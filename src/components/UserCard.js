@@ -13,6 +13,16 @@ export default class UserCard extends Component {
 
   hideModal = () => this.setState({ modalOpen: false })
 
+  onConnectWithUser = () => {
+    this.props.onConnectUser({ groupId: this.props.groupId, userId: this.props.id })
+    this.hideModal()
+  }
+
+  onDislikeUser = () => {
+    this.props.onDislikeUser({ groupId: this.props.groupId, userId: this.props.id })
+    this.hideModal()
+  }
+
   render() {
     const { name, bio, details, group, currentGroup, status } = this.props
     if (currentGroup && status !== CONFIRMED) {
@@ -33,13 +43,13 @@ export default class UserCard extends Component {
         {
           !currentGroup && <Card.Content extra>
             <div className='ui two buttons'>
-              <Button icon='x' color='red'disabled={status ===DISLIKED}/>
+              <Button icon='x' color='red'disabled={status ===DISLIKED} onClick={this.showModal}/>
               <Modal
                 trigger={<Button icon='check' color='green' onClick={this.showModal}/>}
                 open={this.state.modalOpen}
                 onClose={this.hideModal}
                 >
-                  <Header>{name} + "'s Profile"</Header>
+                  <Header>Connect with {name} for {this.props.group} ?</Header>
                   <Modal.Content>
                     <div style={{ padding: 10 }}>
                       <Grid>
@@ -60,10 +70,13 @@ export default class UserCard extends Component {
                   </Modal.Content>
 
                   <Modal.Actions>
-                    <Button color='red' onClick={this.hideModal} inverted>
+                    <Button color='grey' onClick={this.hideModal}>
+                      Cancel
+                    </Button>
+                    <Button color='red' onClick={this.onDislikeUser} inverted>
                       <Icon name='x' /> Nope
                     </Button>
-                    <Button color='green' onClick={this.hideModal} inverted>
+                    <Button color='green' onClick={this.onConnectWithUser} inverted>
                       <Icon name='checkmark' /> Confirm
                     </Button>
                   </Modal.Actions>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, Card, Segment, Header } from 'semantic-ui-react'
 
-import UserCard from './UserCard'
+import UserCard from '../containers/UserCard'
 
 export default class Group extends Component {
 
@@ -10,9 +10,10 @@ export default class Group extends Component {
   }
 
   render() {
-    const { name, users, current } = this.props
+    const { name, current } = this.props
+    const users = Object.values(this.props.users) || []
     const userCards = users.map(user => (
-      <UserCard {...user} group={name} key={user.id} currentGroup={current || false} />
+      <UserCard {...user} group={name} groupId={this.props.id} key={user.id} currentGroup={current || false} />
     ))
     return (
       <Segment raised>

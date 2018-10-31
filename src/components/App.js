@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 import store from '../config/store'
 
-import HomePage from './HomePage'
+import HomePage from '../containers/HomePage'
 import About from './About'
 import MyGroups from '../containers/MyGroups'
 
