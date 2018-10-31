@@ -76,6 +76,14 @@ export default class UserCard extends Component {
                                 <br/>
                                 {bio}
                               </Segment>
+                              <Segment basic>
+                                <Button floated='left' color='red' onClick={this.onDislikeUser} inverted>
+                                  <Icon name='x' /> Nope
+                                </Button>
+                                <Button floated='right' color='green' onClick={this.onConnectWithUser} inverted>
+                                  <Icon name='checkmark' /> Confirm
+                                </Button>
+                              </Segment>
                             </Grid.Column>
                             </Grid>
                         </div>
@@ -84,12 +92,6 @@ export default class UserCard extends Component {
                       <Modal.Actions>
                         <Button color='grey' onClick={this.hideModal}>
                           Cancel
-                        </Button>
-                        <Button color='red' onClick={this.onDislikeUser} inverted>
-                          <Icon name='x' /> Nope
-                        </Button>
-                        <Button color='green' onClick={this.onConnectWithUser} inverted>
-                          <Icon name='checkmark' /> Confirm
                         </Button>
                       </Modal.Actions>
                   </Modal>
