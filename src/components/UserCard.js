@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Icon, Button, Segment, Card, Grid, Image, Modal } from 'semantic-ui-react'
 
-import { randomPic, LIKED, DISLIKED, CONFIRMED } from '../constants'
+import { fullPicPath, LIKED, DISLIKED, CONFIRMED } from '../constants'
 
 export default class UserCard extends Component {
 
@@ -41,7 +41,7 @@ export default class UserCard extends Component {
     }
     return (
       <Card raised={status !==DISLIKED} color={highlightCard[status]} style={this.cardBorder()}>
-        <Image onClick={this.showModal} src={randomPic([this.props.id])} />
+        <Image onClick={this.showModal} src={fullPicPath([this.props.image])} />
         <Card.Content>
           <Card.Header><Header color={highlightCard[status]}>{name}</Header></Card.Header>
           <Card.Meta>
@@ -55,9 +55,9 @@ export default class UserCard extends Component {
               ? <a href={`mailto:${name.split(" ")[0].toLowerCase()}@email.com`}><Icon name='mail' />{name.split(" ")[0].toLowerCase()}@email.com</a>
               : (
                 <div className='ui two buttons'>
-                  <Button icon='x' color='red'disabled={status ===DISLIKED} onClick={this.showModal}/>
+                  <Button icon='x' color='red'disabled={status===DISLIKED} onClick={this.showModal}/>
                   <Modal
-                    trigger={<Button icon='check' color='green' disabled={status ===LIKED} onClick={this.showModal}/>}
+                    trigger={<Button icon='check' color='green' disabled={status===LIKED} onClick={this.showModal}/>}
                     open={this.state.modalOpen}
                     onClose={this.hideModal}
                     >
@@ -66,13 +66,13 @@ export default class UserCard extends Component {
                         <div style={{ padding: 10 }}>
                           <Grid>
                             <Grid.Column width={8}>
-                              <Image src={randomPic([this.props.id])} size='medium' />
+                              <Image src={fullPicPath([this.props.image])} size='medium' />
                             </Grid.Column>
                             <Grid.Column width={8}>
                               <Segment>
                                 <Header>{name}</Header>
                                 <h5>Course: {group}</h5>
-                                <span style={{ fontStyle: 'italic'}}>{details}</span>
+                                <span style={{ fontStyle: 'italic' }}>{details}</span>
                                 <br/>
                                 {bio}
                               </Segment>
