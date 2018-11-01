@@ -10,6 +10,7 @@ import store from '../config/store'
 import HomePage from './HomePage'
 import About from './About'
 import MyGroups from './MyGroups'
+import AddCourse from './AddCourse'
 
 class Root extends Component {
   render() {
@@ -19,6 +20,7 @@ class Root extends Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/about" component={About}/>
           <Route exact path="/groups" component={MyGroups}/>
+          <Route exact path="/add-course" component={AddCourse}/>
         </Switch>
       </React.Fragment>
     )
