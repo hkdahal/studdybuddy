@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Icon, Button, Segment, Card, Grid, Image, Modal } from 'semantic-ui-react'
 
-import { randomPic, LIKED, DISLIKED, CONFIRMED } from '../constants'
+import { fullPicPath, LIKED, DISLIKED, CONFIRMED } from '../constants'
 
 export default class UserCard extends Component {
 
@@ -23,6 +23,14 @@ export default class UserCard extends Component {
     this.hideModal()
   }
 
+  cardBorder = () => {
+    if (this.props.status === LIKED) {
+      return { borderStyle: 'solid', borderWidth: 2, borderColor: 'green'}
+    } else if (this.props.status === DISLIKED) {
+      return { borderStyle: 'solid', borderWidth: 2, borderColor: 'red'}
+    }
+  }
+
   render() {
     const { name, bio, details, group, currentGroup, status } = this.props
     const highlightCard = { [LIKED]: 'green', [DISLIKED]: 'red' }
@@ -32,8 +40,8 @@ export default class UserCard extends Component {
       return null
     }
     return (
-      <Card raised={status !==DISLIKED} color={highlightCard[status]}>
-        <Image onClick={this.showModal} src={randomPic([this.props.id])} />
+      <Card raised={status !==DISLIKED} color={highlightCard[status]} style={this.cardBorder()}>
+        <Image onClick={this.showModal} src={fullPicPath([this.props.image])} />
         <Card.Content>
           <Card.Header><Header color={highlightCard[status]}>{name}</Header></Card.Header>
           <Card.Meta>
@@ -41,50 +49,56 @@ export default class UserCard extends Component {
           </Card.Meta>
           <Card.Description color='black'>{bio}</Card.Description>
         </Card.Content>
-        {
-          !currentGroup && <Card.Content extra>
-            <div className='ui two buttons'>
-              <Button icon='x' color='red'disabled={status ===DISLIKED} onClick={this.showModal}/>
-              <Modal
-                trigger={<Button icon='check' color='green' disabled={status ===LIKED} onClick={this.showModal}/>}
-                open={this.state.modalOpen}
-                onClose={this.hideModal}
-                >
-                  <Header>Connect with {name} for {this.props.group} ?</Header>
-                  <Modal.Content>
-                    <div style={{ padding: 10 }}>
-                      <Grid>
-                        <Grid.Column width={8}>
-                          <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' size='medium' />
-                        </Grid.Column>
-                        <Grid.Column width={8}>
-                          <Segment>
-                            <Header>{name}</Header>
-                            <h5>Course: {group}</h5>
-                            {details}
-                            <br/>
-                            {bio}
-                          </Segment>
-                        </Grid.Column>
-                        </Grid>
-                    </div>
-                  </Modal.Content>
+        <Card.Content extra>
+          {
+            currentGroup
+              ? <a href={`mailto:${name.split(" ")[0].toLowerCase()}@email.com`}><Icon name='mail' />{name.split(" ")[0].toLowerCase()}@email.com</a>
+              : (
+                <div className='ui two buttons'>
+                  <Button icon='x' color='red'disabled={status===DISLIKED} onClick={this.showModal}/>
+                  <Modal
+                    trigger={<Button icon='check' color='green' disabled={status===LIKED} onClick={this.showModal}/>}
+                    open={this.state.modalOpen}
+                    onClose={this.hideModal}
+                    >
+                      <Header>Connect with {name} for {this.props.group} ?</Header>
+                      <Modal.Content>
+                        <div style={{ padding: 10 }}>
+                          <Grid>
+                            <Grid.Column width={8}>
+                              <Image src={fullPicPath([this.props.image])} size='medium' />
+                            </Grid.Column>
+                            <Grid.Column width={8}>
+                              <Segment>
+                                <Header>{name}</Header>
+                                <h5>Course: {group}</h5>
+                                <span style={{ fontStyle: 'italic' }}>{details}</span>
+                                <br/>
+                                {bio}
+                              </Segment>
+                              <Segment basic>
+                                <Button floated='left' color='red' onClick={this.onDislikeUser} inverted>
+                                  <Icon name='x' /> Nope
+                                </Button>
+                                <Button floated='right' color='green' onClick={this.onConnectWithUser} inverted>
+                                  <Icon name='checkmark' /> Confirm
+                                </Button>
+                              </Segment>
+                            </Grid.Column>
+                            </Grid>
+                        </div>
+                      </Modal.Content>
 
-                  <Modal.Actions>
-                    <Button color='grey' onClick={this.hideModal}>
-                      Cancel
-                    </Button>
-                    <Button color='red' onClick={this.onDislikeUser} inverted>
-                      <Icon name='x' /> Nope
-                    </Button>
-                    <Button color='green' onClick={this.onConnectWithUser} inverted>
-                      <Icon name='checkmark' /> Confirm
-                    </Button>
-                  </Modal.Actions>
-              </Modal>
-            </div>
-          </Card.Content>
-        }
+                      <Modal.Actions>
+                        <Button color='grey' onClick={this.hideModal}>
+                          Cancel
+                        </Button>
+                      </Modal.Actions>
+                  </Modal>
+                </div>
+              )
+          }
+        </Card.Content>
       </Card>
     )
   }

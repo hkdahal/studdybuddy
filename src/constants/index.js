@@ -10,8 +10,7 @@ export const CONNECT_WITH_USER = 'CONNECT_WITH_USER'
 export const DISLIKED_USER = 'DISLIKED_USER'
 
 // user profile pics
-export const randomPic = id => {
+export const fullPicPath = image => {
   const base_url = "https://react.semantic-ui.com/images/avatar/large/"
-  const names = ['ade.jpg', 'matthew.png', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'helen.jpg']
-  return base_url + names[id%names.length]
+  return base_url + image
 }

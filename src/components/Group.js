@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Modal, Card, Segment, Header } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { Button, Divider, Modal, Card, Segment, Header } from 'semantic-ui-react'
 
 import UserCard from '../containers/UserCard'
 
@@ -10,10 +10,10 @@ export default class Group extends Component {
   }
 
   render() {
-    const { name, current } = this.props
+    const { name, email, id, current } = this.props
     const users = Object.values(this.props.users) || []
     const userCards = users.map(user => (
-      <UserCard {...user} group={name} groupId={this.props.id} key={user.id} currentGroup={current || false} />
+      <UserCard {...user} group={name} groupId={id} key={user.id} currentGroup={current || false} />
     ))
     return (
       <Segment raised>
@@ -26,15 +26,13 @@ export default class Group extends Component {
               content='Your group members will be notified if you leave.'
               actions={['No', { key: 'yes', content: 'Yes', negative: true, onClick: this.onLeaveGroup }]}
             />
-            <Button color='green'>Email Group</Button>
+            <a href={`mailto:${email}`}><Button color='green'>Email Group</Button></a>
+            <Divider/>
           </React.Fragment>
         )}
-        <br/>
-        <br/>
         <Card.Group itemsPerRow={5}>
           {userCards}
         </Card.Group>
-
       </Segment>
     )
   }
