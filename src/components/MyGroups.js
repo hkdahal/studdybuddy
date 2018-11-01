@@ -1,40 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Header } from 'semantic-ui-react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import NavBar from './NavBar'
-import Group from './Group'
+import Group from '../containers/Group'
+
+import '../styles/my_groups.css'
 
 export default class MyGroups extends Component {
   render() {
-    const currentGroups = [
-      { id: 1, name: 'Quality Assurance of Weaved Systems ', users: [
-        { id: 1, name: 'Leonard McGillicuddy', bio: 'Into Leo-Nardy stuffs', details: 'Weave Engineering' },
-        { id: 1, name: 'Leonard McGillicuddy', bio: 'Into Leo-Nardy stuffs', details: 'Weave Engineering' },
-        { id: 1, name: 'Leonard McGillicuddy', bio: 'Into Leo-Nardy stuffs', details: 'Weave Engineering' },
-        { id: 1, name: 'Leonard McGillicuddy', bio: 'Into Leo-Nardy stuffs', details: 'Weave Engineering' },
-        { id: 3, name: 'Mike Johnson', bio: 'I wanna teach my son John weaving someday!', details: 'Weave Bio' }
-      ] },
-      { id: 2, name: 'Concurrent Basket Weaving Management', users: [
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-      ] },
-      { id: 3, name: 'Intro to Weaving Theory', users: [
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-        { id: 2, name: 'Cortney Weaver', bio: 'Weaving is in my name', details: 'Weaving Science' },
-      ] }
-    ]
-    const groupComponents = currentGroups.map(group => <Group key={group.id} {...group } current={true}/>)
+    const groups = this.props.groups || [];
+    const groupComponents = groups.map(group => (
+      <CSSTransition key={group.id} timeout={500} classNames="fade">
+        <Group {...group } current={true}/>
+      </CSSTransition>
+    ))
     return (
       <React.Fragment>
         <NavBar page='groups' />
         <div style={{ padding: 20 }}>
           <Header> Your Current Groups </Header>
-          {groupComponents}
+          <TransitionGroup className="my-groups">
+            {groupComponents}
+          </TransitionGroup>
         </div>
       </React.Fragment>
     )

@@ -7,10 +7,9 @@ import 'semantic-ui-css/semantic.min.css'
 
 import store from '../config/store'
 
-import HomePage from './HomePage'
+import HomePage from '../containers/HomePage'
 import About from './About'
-import MyGroups from './MyGroups'
-import AddCourse from './AddCourse'
+import MyGroups from '../containers/MyGroups'
 
 class Root extends Component {
   render() {
