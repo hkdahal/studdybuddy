@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import Group from './Group'
 
 const options = [
+  { key: 'NA', text: 'Any Size', value: 'NA'},
   { key: '1', text: '1', value: '1' },
   { key: '2', text: '2', value: '2' },
   { key: '3', text: '3', value: '3' },
@@ -49,7 +50,7 @@ export default class AddCourse extends Component{
         return (
 
           <React.Fragment>
-            <NavBar page='home'/>
+            <NavBar page='add-course'/>
             <div style={{ padding: 100}}>
               <Segment raised>
                 <Form>

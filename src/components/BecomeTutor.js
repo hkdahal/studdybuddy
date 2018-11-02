@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import Group from './Group'
 
 const options = [
+  { key: 'NA', text: 'Any Size', value: 'NA'},
   { key: '1', text: '1', value: '1' },
   { key: '2', text: '2', value: '2' },
   { key: '3', text: '3', value: '3' },
@@ -22,7 +23,7 @@ const options = [
 ]
 
 
-export default class AddCourse extends Component{
+export default class EecomeTutor extends Component{
   state = {
     course_id: "",
     class_number: "",
@@ -31,33 +32,32 @@ export default class AddCourse extends Component{
     class_num_error: false
   }
 
-  onSubmit = () => {
-    this.setState({ course_id_error: this.state.course_id === "" })
-    this.setState({ class_num_error: this.state.class_number === ""})
-  }
-
-  onCourseIdChange = (ev, data) => {
-    this.setState({ course_id: data.value})
-  }
-
-  onClassNumChange = (ev, data) => {
-    this.setState({ class_number: data.value})
-  }
+  // onSubmit = () => {
+  //   this.setState({ course_id_error: this.state.course_id === "" })
+  //   this.setState({ class_num_error: this.state.class_number === ""})
+  // }
+  //
+  // onCourseIdChange = (ev, data) => {
+  //   this.setState({ course_id: data.value})
+  // }
+  //
+  // onClassNumChange = (ev, data) => {
+  //   this.setState({ class_number: data.value})
+  // }
 
   render(){
     const { value } = this.state
         return (
 
           <React.Fragment>
-            <NavBar page='home'/>
+            <NavBar page='become-tutor'/>
             <div style={{ padding: 100}}>
               <Segment raised>
                 <Form>
                   <Form.Group widths='4'>
-                    <Form.Input fluid label='Course ID' placeholder='(eg: SWEN-101)' onChange={this.onCourseIdChange} error={this.state.course_id_error}/>
-                    <Form.Input fluid label='Class number' placeholder='(eg: 04)' />
+                    <Form.Input fluid label='Course ID' placeholder='(eg: SWEN-101)'/>
                   </Form.Group>
-                  <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 5)' onChange={this.onClassNumChange} error={this.state.class_num_error}/>
+                  <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 5)' />
 
                   <Form.Checkbox label='NTID student' />
                   <Form.Button onClick={this.onSubmit}>Submit</Form.Button>

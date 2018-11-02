@@ -10,6 +10,7 @@ import AddCourse from './AddCourse'
 import HomePage from '../containers/HomePage'
 import About from './About'
 import MyGroups from '../containers/MyGroups'
+import BecomeTutor from './BecomeTutor'
 
 class Root extends Component {
   render() {
@@ -20,6 +21,7 @@ class Root extends Component {
           <Route exact path="/about" component={About}/>
           <Route exact path="/groups" component={MyGroups}/>
           <Route exact path="/add-course" component={AddCourse}/>
+          <Route exact path="/become-tutor" component={BecomeTutor}/>
         </Switch>
       </React.Fragment>
     )
