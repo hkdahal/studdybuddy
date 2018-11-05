@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Segment, Input, Form, Header } from 'semantic-ui-react'
+import { Segment, Input, Form, Header, Modal, Divider, Button} from 'semantic-ui-react'
+import { Link } from "react-router-dom"
 
 import NavBar from './NavBar'
 import Group from './Group'
@@ -24,17 +25,30 @@ const options = [
 
 
 export default class AddCourse extends Component{
+
+
   state = {
     course_id: "",
     class_number: "",
     group_size: "",
     course_id_error: false,
-    class_num_error: false
+    class_num_error: false,
+    modalOpen: false
   }
 
   onSubmit = () => {
     this.setState({ course_id_error: this.state.course_id != "SWEN-101" })
     this.setState({ class_num_error: this.state.class_number != "4"})
+
+
+    if(this.state.course_id === "SWEN-101" && this.state.class_number === "4"){
+      // upon clicking submit
+      // conirm/acknowledge the submission for user
+      // inform mainpage of new class to display potential buddys
+      this.setState({modalOpen: true})
+      console.log("I am here somehow")
+      this.props.onAddCourse()
+    }
   }
 
   onCourseIdChange = (ev, data) => {
@@ -45,13 +59,19 @@ export default class AddCourse extends Component{
     this.setState({ class_number: data.value})
   }
 
+  hideModal = () => {
+    this.course_id_ref.value = ""
+    this.setState({ modalOpen: false })
+
+  }
+
   render(){
     const { value } = this.state
         return (
 
           <React.Fragment>
             <NavBar page='add-course'/>
-            <div style={{ padding: 40}}>
+            <div style={{ padding: 100}}>
               <Header as='h1'>New Course</Header>
 
               <Segment raised>
@@ -60,10 +80,22 @@ export default class AddCourse extends Component{
                     <Form.Input fluid label='Course ID' placeholder='(eg: SWEN-101)' onChange={this.onCourseIdChange} error={this.state.course_id_error}/>
                     <Form.Input fluid label='Class number' placeholder='(eg: 04)' />
                   </Form.Group>
-                  <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 5)' onChange={this.onClassNumChange} error={this.state.class_num_error}/>
+                  <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 4)' onChange={this.onClassNumChange} error={this.state.class_num_error}/>
 
                   <Form.Checkbox label='NTID student' />
-                  <Form.Button floated="center" onClick={this.onSubmit}>Submit</Form.Button>
+                  <Modal trigger={<Form.Button onClick={this.onSubmit}>Submit</Form.Button>}
+                    open={this.state.modalOpen}
+                    onClose={this.hideModal}>
+                    <Modal.Header>You've been added to this class</Modal.Header>
+                    <Modal.Content>
+                      <Modal.Description>
+                        <Header>Default Profile Image</Header>
+                        <Link to='/'> <Button>OK</Button> </Link>
+
+                      </Modal.Description>
+                    </Modal.Content>
+                  </Modal>
+                  {/*}<Form.Button onClick={this.onSubmit}>Submit</Form.Button>*/}
                 </Form>
               </Segment>
             </div>

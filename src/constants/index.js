@@ -8,6 +8,7 @@ export const NOT_DECIDED = 'NOT_DECIDED'
 export const LEAVE_GROUP = 'LEAVE_GROUP'
 export const CONNECT_WITH_USER = 'CONNECT_WITH_USER'
 export const DISLIKED_USER = 'DISLIKED_USER'
+export const ADDED_CLASS = 'ADDED_CLASS'
 
 // user profile pics
 export const fullPicPath = image => {

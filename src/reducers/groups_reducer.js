@@ -1,6 +1,7 @@
-import { LEAVE_GROUP, CONNECT_WITH_USER, DISLIKED_USER, DISLIKED, LIKED, CONFIRMED, NOT_DECIDED } from '../constants'
+import { LEAVE_GROUP, CONNECT_WITH_USER, DISLIKED_USER, DISLIKED, LIKED, CONFIRMED, NOT_DECIDED, ADDED_CLASS } from '../constants'
 // 'ade.jpg', 'matthew.png', 'chris.jpg', 'daniel.jpg', 'elliot.jpg', 'helen.jpg', 'christian.jpg'
 const initialState = {
+  newClass: false,
   current: {
     1: { id: 1, name: 'Quality Assurance of Weaved Systems ', email: 'group1@studdybuddy.com', users: {
       4: { id: 4, name: 'Steven Tyler', bio: 'Into Leo-Nardy stuffs', details: 'Weave Engineering', status: CONFIRMED, image: 'elliot.jpg' },
@@ -103,8 +104,19 @@ const ACTION_HANDLERS = {
         }
       }
     }
+  },
+
+  [ADDED_CLASS]: (state, action) => {
+    return{
+      ...state,
+      newClass: true,
+      ongoing: {
+        ...state.ongoing,
+        463856383: { id: 3, name: 'Intro to Weaving Theory', users: {}}
+      }
+    }
   }
- }
+}
 
 export default function groupsReducer (state=initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
