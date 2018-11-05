@@ -112,7 +112,13 @@ const ACTION_HANDLERS = {
       newClass: true,
       ongoing: {
         ...state.ongoing,
-        463856383: { id: 3, name: 'Intro to Weaving Theory', users: {}}
+        463856383: { id: 463856383, name: 'SWEN-101', users: {
+          115534: { id: 115534, name: 'Kalvin Hobbes', bio: 'Into tigers and comics', details: 'Weave Engineering', status: NOT_DECIDED, image: 'daniel.jpg' },
+          10135: { id: 10135, name: 'Harry P. Otter', bio: 'I thought this was crocheting!', details: 'Weave Bio', status: NOT_DECIDED, image: 'matthew.png' },
+          1145: { id: 1145, name: 'Betsy Longly', bio: 'I wanna learn to weave!', details: 'Weave Bio', status: NOT_DECIDED, image: 'christian.jpg' },
+          21533: { id: 21533, name: 'Elliot Jones', bio: 'I wanna teach my daughter Ellie weaving someday!', details: 'Weave Bio', status: NOT_DECIDED, image: 'elliot.jpg' },
+          7343: { id: 7343, name: 'Nikki Catvy', bio: 'Help CS is too hard', details: 'Weave Bio', status: NOT_DECIDED, image: 'helen.jpg' }
+        }}
       }
     }
   }

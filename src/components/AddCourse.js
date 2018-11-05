@@ -86,10 +86,10 @@ export default class AddCourse extends Component{
                   <Modal trigger={<Form.Button onClick={this.onSubmit}>Submit</Form.Button>}
                     open={this.state.modalOpen}
                     onClose={this.hideModal}>
-                    <Modal.Header>You've been added to this class</Modal.Header>
+                    <Modal.Header>You've been added to this class:</Modal.Header>
+                    <Modal.Header>SWEN-101</Modal.Header>
                     <Modal.Content>
                       <Modal.Description>
-                        <Header>Default Profile Image</Header>
                         <Link to='/'> <Button>OK</Button> </Link>
 
                       </Modal.Description>
