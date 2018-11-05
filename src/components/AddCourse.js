@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Segment, Input, Form } from 'semantic-ui-react'
+import { Segment, Input, Form, Header } from 'semantic-ui-react'
 
 import NavBar from './NavBar'
 import Group from './Group'
 
 const options = [
+  { key: 'NA', text: 'Any Size', value: 'NA'},
   { key: '1', text: '1', value: '1' },
   { key: '2', text: '2', value: '2' },
   { key: '3', text: '3', value: '3' },
@@ -34,6 +36,8 @@ export default class AddCourse extends Component{
   onSubmit = () => {
     this.setState({ course_id_error: this.state.course_id === "" })
     this.setState({ class_num_error: this.state.class_number === ""})
+    this.setState({ course_id_error: this.state.course_id != "SWEN-101" })
+    this.setState({ class_num_error: this.state.class_number != "4"})
   }
 
   onCourseIdChange = (ev, data) => {
@@ -51,6 +55,10 @@ export default class AddCourse extends Component{
           <React.Fragment>
             <NavBar page='home'/>
             <div style={{ padding: 100}}>
+            <NavBar page='add-course'/>
+            <div style={{ padding: 40}}>
+              <Header as='h1'>New Course</Header>
+
               <Segment raised>
                 <Form>
                   <Form.Group widths='4'>
@@ -61,6 +69,7 @@ export default class AddCourse extends Component{
 
                   <Form.Checkbox label='NTID student' />
                   <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
+                  <Form.Button floated="center" onClick={this.onSubmit}>Submit</Form.Button>
                 </Form>
               </Segment>
             </div>
