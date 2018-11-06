@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Form, Header } from 'semantic-ui-react'
+import { Segment, Form, Header, Grid } from 'semantic-ui-react'
 
 import NavBar from './NavBar'
 import TutorClass from './TutorClass'
@@ -18,12 +18,7 @@ const options = [
   { key: '10', text: '10', value: '10' },
 ]
 
-const classes = [
-  { key: 'NA', text: 'Choose a class...', value: 'NA'},
-  { key: 'QAWS_101', text: 'QAWS_101', value: 'QAWS_101' },
-  { key: 'QAWS_331', text: 'QAWS_331', value: 'QAWS_331' },
-  { key: 'QAWS_444', text: 'QAWS_444', value: 'QAWS_444' },
-]
+// const classes = 
 
 export default class BecomeTutor extends Component{
   state = {
@@ -31,10 +26,21 @@ export default class BecomeTutor extends Component{
     class_number: "",
     group_size: "",
     course_id_error: false,
-    class_num_error: false
+    class_num_error: false,
+    classes: {
+      NA: { key: 'NA', text: 'Choose a class...', value: 'NA'},
+      QAWS_101: { key: 'QAWS_101', text: 'QAWS_101', value: 'QAWS_101' },
+      QAWS_331: { key: 'QAWS_331', text: 'QAWS_331', value: 'QAWS_331' },
+      QAWS_444: { key: 'QAWS_444', text: 'QAWS_444', value: 'QAWS_444' },
+    },
+    selectedClass: undefined,
+    currentClasses: []
   }
 
-  onAdd(event) {
+  onAdd = (ev, data) => {
+    console.log(data);
+    this.setState({ currentClasses: [...this.state.currentClasses, this.state.classes[this.state.selectedClass]] })
+  }
 
     // const inputList = this.state.inputList;
     // this.setState({
@@ -46,46 +52,29 @@ export default class BecomeTutor extends Component{
     // this.setState({
     //     change: element
     // });
+  // }
+
+  listenToOnChange = (e, data) => {
+    console.log(data.value)
+    if (data.value !== "NA") {
+      this.setState({ selectedClass: data.value })
+    }
   }
 
   render(){
     // const { value } = this.state
-    return (
-      <React.Fragment>
-        <NavBar page='become-tutor'/>
 
-        {/* <div style={{padding:50}}>
-          <Header>Tutor</Header>
-        </div> */}
-
-        <div style={{padding: 50}}>
-          {/* <Segment raised> */}
-            <Form>
-
-              <Form.Group widths='3'>
-                {/* <Form.Input placeholder="Search for a class to tutor (e.g. SWEN-101)"/> */}
-
-                <Form.Select fluid options={classes} placeholder='Choose a class...'/>
-
-                <Form.Button onclick={this.onAdd}>Add</Form.Button>
-              </Form.Group>
-
-            </Form>
-          {/* </Segment> */}
-        </div>
-
-        <div style={{ padding: 50}}>
+    const classComponents = this.state.currentClasses.map(cl => {
+      return (
+        <div style={{ padding: 50}} key={cl.key}>
           <Segment raised>
             <Form>
 
-              <Header>QAWS_101</Header>
+              <Header>{cl.text}</Header>
 
-              {/* <Form.Group widths='4'> */}
               <Form.Input fluid label='Projects Done' placeholder='(e.g. HealthNet)'/>
 
               <Form.Input fluid label='Relevant Classes' placeholder='(e.g. QAWS_444)'/>
-
-              {/* </Form.Group> */}
 
               <Form.Group widths='6'>
                 <Form.Input fluid label='Grade Received' placeholder='(e.g. A, A-, B+, B)'/>
@@ -100,6 +89,43 @@ export default class BecomeTutor extends Component{
             </Form>
           </Segment>
         </div>
+      )
+    })
+    return (
+      <React.Fragment>
+        <NavBar page='become-tutor'/>
+
+        {/* <div style={{padding:50}}>
+          <Header>Tutor</Header>
+        </div> */}
+
+        <div style={{padding: 50}}>
+          {/* <Segment raised> */}
+            <Form>
+
+              <Grid>
+                <Grid.Column width={15}>
+                  <Form.Select onChange={this.listenToOnChange} fluid options={Object.values(this.state.classes)} placeholder='Choose a class...'/>
+                </Grid.Column>
+                <Grid.Column width={1}>
+                  <Form.Button onClick={this.onAdd}>Add</Form.Button>
+                </Grid.Column>
+              </Grid>
+
+              {/* <Form.Group>
+                {/* <Form.Input placeholder="Search for a class to tutor (e.g. SWEN-101)"/> */}
+
+                
+
+                
+              {/* </Form.Group> */}
+
+            </Form>
+          {/* </Segment> */}
+        </div>
+
+        {classComponents}
+        
 
         <div style={{ padding: 50}}>
           <Segment raised>
@@ -107,12 +133,9 @@ export default class BecomeTutor extends Component{
           </Segment>
           
           <Form.Checkbox label='Can you accommodate NTID students?' />    
-        </div>
+        </div> */}
 
-        <div style={{ padding: 50}}>
-
-          {/* <Form.Checkbox label='Can you accommodate NTID students?' />     */}
-                
+         <div style={{ padding: 50}}>     
           <Segment raised>
             <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
           </Segment>
