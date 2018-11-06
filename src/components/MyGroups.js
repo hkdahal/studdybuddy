@@ -10,7 +10,6 @@ import '../styles/my_groups.css'
 export default class MyGroups extends Component {
 
   componentDidMount() {
-    // console.log("mark notification badge off")
     this.props.onBadgeOff()
   }
 
@@ -18,7 +17,7 @@ export default class MyGroups extends Component {
     const groups = this.props.groups || [];
     const groupComponents = groups.map(group => (
       <CSSTransition key={group.id} timeout={500} classNames="fade">
-        <Group {...group } current={true}/>
+        <Group {...group } activeId={groups[0].id} current={true}/>
       </CSSTransition>
     ))
     return (
