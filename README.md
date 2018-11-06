@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [React Semantic UI](https://react.semantic-ui.com/).
+
+## Demo
+
+Site is live at: [studdybuddy.meroapps.com](https://studdybuddy.meroapps.com)
+
+Backup URL: [studdybuddy.netlify.com](https://studdybuddy.netlify.com)
 
 ## Dependencies
 
