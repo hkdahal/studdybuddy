@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Segment, Input, Form } from 'semantic-ui-react'
+import React, { Component } from 'react'
 import { Segment, Input, Form, Header } from 'semantic-ui-react'
 
 import NavBar from './NavBar'
@@ -53,8 +52,6 @@ export default class AddCourse extends Component{
         return (
 
           <React.Fragment>
-            <NavBar page='home'/>
-            <div style={{ padding: 100}}>
             <NavBar page='add-course'/>
             <div style={{ padding: 40}}>
               <Header as='h1'>New Course</Header>

@@ -22,9 +22,7 @@ const options = [
   { key: '15', text: '15', value: '15' },
 ]
 
-
-export default class AddCourse extends Component{
-export default class EecomeTutor extends Component{
+export default class BecomeTutor extends Component{
   state = {
     course_id: "",
     class_number: "",
@@ -63,7 +61,6 @@ export default class EecomeTutor extends Component{
         return (
 
           <React.Fragment>
-            <NavBar page='home'/>
             <NavBar page='become-tutor'/>
             <div style={{ padding: 100}}>
               <Segment raised>
