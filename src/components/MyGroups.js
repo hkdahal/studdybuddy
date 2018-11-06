@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Header } from 'semantic-ui-react'
+import { Accordion, Header } from 'semantic-ui-react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import NavBar from './NavBar'
@@ -18,12 +18,14 @@ export default class MyGroups extends Component {
     return (
       <React.Fragment>
         <NavBar page='groups' />
-        <div style={{ padding: 20 }}>
-          <Header> Your Current Groups </Header>
-          <TransitionGroup className="my-groups">
-            {groupComponents}
-          </TransitionGroup>
-        </div>
+        <Accordion>
+          <div style={{ padding: 20 }}>
+            <Header> Your Current Groups </Header>
+            <TransitionGroup className="my-groups">
+              {groupComponents}
+            </TransitionGroup>
+          </div>
+        </Accordion>
       </React.Fragment>
     )
   }

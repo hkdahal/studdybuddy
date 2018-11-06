@@ -10,14 +10,11 @@ export default class HomePage extends Component {
     const groupComponents = groups.map(group => <Group key={group.id} {...group }/>)
     return (
       <React.Fragment>
-
         <NavBar page='home'/>
         <Accordion>
-
           <div style={{ padding: 20 }}>
             {groupComponents}
           </div>
-
         </Accordion>
       </React.Fragment>
     )

@@ -29,31 +29,28 @@ export default class Group extends Component {
     ))
     return (
       <Segment raised>
-
-      <Accordion.Title active={activeIndex === id} index={id} onClick={this.handleClick}>
-        <Icon name='dropdown' /> {name}
-      </Accordion.Title>
-
-
-        { current && (
-          <React.Fragment>
-            <Modal
-              trigger={<Button floated='right' color='red'> Leave Group </Button>}
-              header='Are you sure you want to leave this group?'
-              content='Your group members will be notified if you leave.'
-              actions={['No', { key: 'yes', content: 'Yes', negative: true, onClick: this.onLeaveGroup }]}
-            />
-            <a href={`mailto:${email}`}><Button color='green'>Email Group</Button></a>
-            <Divider/>
-          </React.Fragment>
-        )}
+        <Accordion.Title active={activeIndex === id} index={id} onClick={this.handleClick}>
+          <Header><Icon name='dropdown' /> {name}</Header>
+        </Accordion.Title>
 
         <Accordion.Content active={activeIndex === id}>
-        <Card.Group itemsPerRow={5}>
-          {userCards}
-        </Card.Group>
+          { current && (
+            <React.Fragment>
+              <Divider/>
+              <Modal
+                trigger={<Button floated='right' color='red'> Leave Group </Button>}
+                header='Are you sure you want to leave this group?'
+                content='Your group members will be notified if you leave.'
+                actions={['No', { key: 'yes', content: 'Yes', negative: true, onClick: this.onLeaveGroup }]}
+              />
+              <a href={`mailto:${email}`}><Button color='green'>Email Group</Button></a>
+              <Divider/>
+            </React.Fragment>
+          )}
+          <Card.Group itemsPerRow={5}>
+            {userCards}
+          </Card.Group>
         </Accordion.Content>
-
       </Segment>
     )
   }

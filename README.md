@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Dependencies
 
-### Yard
+### Yarn
 Dependencies may be managed using the [Yarn](https://yarnpkg.com/en/docs/getting-started) depdencency manager.
 
 ### npm
