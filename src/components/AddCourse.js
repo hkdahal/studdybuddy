@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { Segment, Input, Form, Header } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Segment, Input, Form, Header, Modal, Divider, Button} from 'semantic-ui-react'
+import { Link } from "react-router-dom"
 
-import NavBar from './NavBar'
+import NavBar from '../containers/NavBar'
 import Group from './Group'
 
 const options = [
@@ -15,6 +16,7 @@ const options = [
   { key: '7', text: '7', value: '7' },
   { key: '8', text: '8', value: '8' },
   { key: '9', text: '9', value: '9' },
+  { key: '10', text: '10', value: '10' },
   { key: '11', text: '11', value: '11' },
   { key: '12', text: '12', value: '12' },
   { key: '13', text: '13', value: '13' },
@@ -24,19 +26,33 @@ const options = [
 
 
 export default class AddCourse extends Component{
+
+
   state = {
     course_id: "",
     class_number: "",
     group_size: "",
     course_id_error: false,
-    class_num_error: false
+    class_num_error: false,
+    course_sect_error: false,
+    modalOpen: false
   }
 
   onSubmit = () => {
     this.setState({ course_id_error: this.state.course_id === "" })
     this.setState({ class_num_error: this.state.class_number === ""})
     this.setState({ course_id_error: this.state.course_id != "SWEN-101" })
-    this.setState({ class_num_error: this.state.class_number != "4"})
+    this.setState({ class_num_error: (this.state.class_number != "4")})
+    this.setState({ course_sect_error: this.state.course_sect != "05"})
+
+
+    if(this.state.course_id === "SWEN-101" && this.state.class_number === "4" && this.state.course_sect === "05"){
+      // upon clicking submit
+      // conirm/acknowledge the submission for user
+      // inform mainpage of new class to display potential buddys
+      this.setState({modalOpen: true})
+      this.props.onAddCourse()
+    }
   }
 
   onCourseIdChange = (ev, data) => {
@@ -47,33 +63,50 @@ export default class AddCourse extends Component{
     this.setState({ class_number: data.value})
   }
 
+  onCourseSectionChange = (ev, data) => {
+    this.setState({course_sect: data.value})
+  }
+
+  hideModal = () => {
+    this.setState({ modalOpen: false })
+
+  }
+
   render(){
     const { value } = this.state
         return (
 
           <React.Fragment>
             <NavBar page='add-course'/>
-            <div style={{ padding: 40}}>
+            <div style={{ padding: 100}}>
               <Header as='h1'>New Course</Header>
 
               <Segment raised>
                 <Form>
                   <Form.Group widths='4'>
                     <Form.Input fluid label='Course ID' placeholder='(eg: SWEN-101)' onChange={this.onCourseIdChange} error={this.state.course_id_error}/>
-                    <Form.Input fluid label='Class number' placeholder='(eg: 04)' />
+                    <Form.Input fluid label='Course Section' placeholder='(eg: 05)' onChange={this.onCourseSectionChange} error={this.state.course_sect_error} />
                   </Form.Group>
-                  <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 5)' onChange={this.onClassNumChange} error={this.state.class_num_error}/>
+                  <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 4)' onChange={this.onClassNumChange} error={this.state.class_num_error}/>
 
                   <Form.Checkbox label='NTID student' />
-                  <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
-                  <Form.Button floated="center" onClick={this.onSubmit}>Submit</Form.Button>
+                  <Modal trigger={<Form.Button onClick={this.onSubmit}>Submit</Form.Button>}
+                    open={this.state.modalOpen}
+                    onClose={this.hideModal}>
+                    <Modal.Header>You've been added to this class:</Modal.Header>
+                    <Modal.Header>SWEN-101</Modal.Header>
+                    <Modal.Content>
+                      <Modal.Description>
+                        <Link to='/'> <Button>OK</Button> </Link>
+                      </Modal.Description>
+                    </Modal.Content>
+                  </Modal>
                 </Form>
               </Segment>
             </div>
           </React.Fragment>
 
         )
-
 
     const InputCourseID = () => <Input focus placeholder='Course ID (eg: SWEN-101)' />
     const InputClassNumber = () => <Input focus placeholder= 'Class number (eg: 03)' />
@@ -83,18 +116,6 @@ export default class AddCourse extends Component{
       padding: 20
     }
 
-    /* return (
-      <React.Fragment>
-        <NavBar page='add-course'/>
-        <div style={divStyle}>
-          <InputCourseID/>
-          <InputClassNumber/>
-        </div>
-      </React.Fragment>
-      // InputCourseID,
-      // InputClassNumber
-    )
-    */
   }
 
 }

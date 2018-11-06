@@ -1,4 +1,4 @@
-import { LEAVE_GROUP, CONNECT_WITH_USER, DISLIKED_USER } from '../constants'
+import { LEAVE_GROUP, CONNECT_WITH_USER, DISLIKED_USER, ADDED_CLASS, JOIN_GROUP, BADGE_OFF } from '../constants'
 
 export const leaveGroup = (groupId) => {
   return dispatch => {
@@ -25,6 +25,35 @@ export const dislikeUser = (payload) => {
     return dispatch({
       type: DISLIKED_USER,
       payload: { groupId, userId }
+    })
+  }
+}
+
+
+export const addCourse = (payload) => {
+  return dispatch => {
+    return dispatch({
+      type: ADDED_CLASS,
+      payload: {}
+    })
+  }
+}
+
+export const joinGroup = (payload) => {
+  const { groupId } = payload
+  return dispatch => {
+    return dispatch({
+      type: JOIN_GROUP,
+      payload: { groupId }
+    })
+  }
+}
+
+export const turnBadgeOff = () => {
+  return dispatch => {
+    return dispatch({
+      type: BADGE_OFF,
+      payload: {}
     })
   }
 }

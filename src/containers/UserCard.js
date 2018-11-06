@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
-import { connectWithUser, dislikeUser } from '../actions/group_actions'
+import { connectWithUser, dislikeUser, joinGroup } from '../actions/group_actions'
 
 import UserCard from '../components/UserCard'
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  groups: state.groups.ongoing
+})
 
 const mapDispatchToProps = dispatch => ({
   onConnectUser: payload => {
@@ -11,6 +13,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onDislikeUser: payload => {
     dispatch(dislikeUser(payload))
+  },
+  onJoinGroup: payload => {
+    dispatch(joinGroup(payload))
   }
 })
 

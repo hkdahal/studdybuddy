@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { Header, Icon, Button, Segment, Card, Grid, Image, Modal } from 'semantic-ui-react'
+import { Header, Icon, Button, Segment, Card, Grid, Image, Modal, Placeholder } from 'semantic-ui-react'
 
 import { fullPicPath, LIKED, DISLIKED, CONFIRMED } from '../constants'
 
 export default class UserCard extends Component {
 
   state = {
-    modalOpen: false
+    modalOpen: false,
+    loading: true
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ loading: false })
+    }, 1000)
   }
 
   showModal = () => this.setState({ modalOpen: true })
@@ -16,6 +23,16 @@ export default class UserCard extends Component {
   onConnectWithUser = () => {
     this.props.onConnectUser({ groupId: this.props.groupId, userId: this.props.id })
     this.hideModal()
+    const currGroup = this.props.groups[this.props.groupId]
+    let likedUsers = 1
+    for (let user in currGroup.users) {
+      if (currGroup.users[user].status === LIKED) {
+        likedUsers += 1
+      }
+    }
+    if (likedUsers === currGroup.ideal_group_size-1) {
+      this.props.onJoinGroup({ groupId: this.props.groupId })
+    }
   }
 
   onDislikeUser = () => {
@@ -24,6 +41,7 @@ export default class UserCard extends Component {
   }
 
   cardBorder = () => {
+    if (this.state.loading) return null
     if (this.props.status === LIKED) {
       return { borderStyle: 'solid', borderWidth: 2, borderColor: 'green'}
     } else if (this.props.status === DISLIKED) {
@@ -40,24 +58,42 @@ export default class UserCard extends Component {
       return null
     }
     return (
-      <Card raised={status !==DISLIKED} color={highlightCard[status]} style={this.cardBorder()}>
-        <Image onClick={this.showModal} src={fullPicPath([this.props.image])} />
+      <Card raised={status !==DISLIKED} color={this.state.loading ? null : highlightCard[status]} style={this.cardBorder()}>
+        {
+          this.state.loading
+            ? <Placeholder> <Placeholder.Image square /> </Placeholder>
+            : <Image onClick={this.showModal} src={fullPicPath([this.props.image])} />
+        }
         <Card.Content>
-          <Card.Header><Header color={highlightCard[status]}>{name}</Header></Card.Header>
-          <Card.Meta>
-            <span>{details}</span>
-          </Card.Meta>
-          <Card.Description color='black'>{bio}</Card.Description>
+          {
+            this.state.loading
+              ? (
+                <Placeholder>
+                   <Placeholder.Header><Placeholder.Line length='long' /></Placeholder.Header>
+                 </Placeholder>
+              )
+              : (
+                <React.Fragment>
+                  <Card.Header><Header color={highlightCard[status]}>{name}</Header></Card.Header>
+                  <Card.Meta>
+                    <span>{details}</span>
+                  </Card.Meta>
+                  <Card.Description color='black'>{bio}</Card.Description>
+                </React.Fragment>
+              )
+          }
         </Card.Content>
         <Card.Content extra>
           {
             currentGroup
-              ? <a href={`mailto:${name.split(" ")[0].toLowerCase()}@email.com`}><Icon name='mail' />{name.split(" ")[0].toLowerCase()}@email.com</a>
+              ? this.state.loading
+                ? <Placeholder.Header><Placeholder.Line length='long' /></Placeholder.Header>
+                : <a href={`mailto:${name.split(" ")[0].toLowerCase()}@email.com`}><Icon name='mail' />{name.split(" ")[0].toLowerCase()}@email.com</a>
               : (
                 <div className='ui two buttons'>
-                  <Button icon='x' color='red'disabled={status===DISLIKED} onClick={this.showModal}/>
+                  <Button icon='x' color='red'disabled={this.state.loading || status===DISLIKED} onClick={this.showModal}/>
                   <Modal
-                    trigger={<Button icon='check' color='green' disabled={status===LIKED} onClick={this.showModal}/>}
+                    trigger={<Button icon='check' color='green' disabled={this.state.loading || status===LIKED} onClick={this.showModal}/>}
                     open={this.state.modalOpen}
                     onClose={this.hideModal}
                     >

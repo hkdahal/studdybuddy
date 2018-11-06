@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import { Accordion, Header } from 'semantic-ui-react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-import NavBar from './NavBar'
+import NavBar from '../containers/NavBar'
 import Group from '../containers/Group'
 
 import '../styles/my_groups.css'
 
 export default class MyGroups extends Component {
+
+  componentDidMount() {
+    // console.log("mark notification badge off")
+    this.props.onBadgeOff()
+  }
+
   render() {
     const groups = this.props.groups || [];
     const groupComponents = groups.map(group => (

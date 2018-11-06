@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import 'semantic-ui-css/semantic.min.css'
 
 import store from '../config/store'
-import AddCourse from './AddCourse'
+import AddCourse from '../containers/AddClass'
 import HomePage from '../containers/HomePage'
 import About from './About'
 import MyGroups from '../containers/MyGroups'
