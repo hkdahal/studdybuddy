@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Segment, Form, Header, Grid } from 'semantic-ui-react'
 
-import NavBar from './NavBar'
+import NavBar from '../containers/NavBar'
 // import TutorClass from './TutorClass'
 
 const options = [
@@ -18,7 +18,7 @@ const options = [
   { key: '10', text: '10', value: '10' },
 ]
 
-// const classes = 
+// const classes =
 
 export default class BecomeTutor extends Component{
   state = {
@@ -115,9 +115,9 @@ export default class BecomeTutor extends Component{
               {/* <Form.Group>
                 {/* <Form.Input placeholder="Search for a class to tutor (e.g. SWEN-101)"/> */}
 
-                
 
-                
+
+
               {/* </Form.Group> */}
 
             </Form>
@@ -125,17 +125,17 @@ export default class BecomeTutor extends Component{
         </div>
 
         {classComponents}
-        
+
 
         <div style={{ padding: 50}}>
           <Segment raised>
             <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
           </Segment>
-          
-          <Form.Checkbox label='Can you accommodate NTID students?' />    
+
+          <Form.Checkbox label='Can you accommodate NTID students?' />
         </div>
 
-         <div style={{ padding: 50}}>     
+         <div style={{ padding: 50}}>
           <Segment raised>
             <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
           </Segment>

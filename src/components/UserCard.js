@@ -23,6 +23,16 @@ export default class UserCard extends Component {
   onConnectWithUser = () => {
     this.props.onConnectUser({ groupId: this.props.groupId, userId: this.props.id })
     this.hideModal()
+    const currGroup = this.props.groups[this.props.groupId]
+    let likedUsers = 1
+    for (let user in currGroup.users) {
+      if (currGroup.users[user].status === LIKED) {
+        likedUsers += 1
+      }
+    }
+    if (likedUsers === currGroup.ideal_group_size-1) {
+      this.props.onJoinGroup({ groupId: this.props.groupId })
+    }
   }
 
   onDislikeUser = () => {

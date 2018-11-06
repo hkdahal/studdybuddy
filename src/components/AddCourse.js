@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Input, Form, Header, Modal, Divider, Button} from 'semantic-ui-react'
 import { Link } from "react-router-dom"
 
-import NavBar from './NavBar'
+import NavBar from '../containers/NavBar'
 import Group from './Group'
 
 const options = [
