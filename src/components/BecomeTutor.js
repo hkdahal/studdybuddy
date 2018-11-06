@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Segment, Input, Form } from 'semantic-ui-react'
 
-import NavBar from './NavBar'
+import NavBar from '../containers/NavBar'
 import Group from './Group'
 
 const options = [
