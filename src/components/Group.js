@@ -38,7 +38,7 @@ export default class Group extends Component {
         { current && (
           <React.Fragment>
             <Modal
-              trigger={<Button floated='right' color='red'>Leave Group</Button>}
+              trigger={<Button floated='right' color='red'> Leave Group </Button>}
               header='Are you sure you want to leave this group?'
               content='Your group members will be notified if you leave.'
               actions={['No', { key: 'yes', content: 'Yes', negative: true, onClick: this.onLeaveGroup }]}
