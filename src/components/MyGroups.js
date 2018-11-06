@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Header } from 'semantic-ui-react'
+import { Accordion, Header } from 'semantic-ui-react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import NavBar from '../containers/NavBar'
@@ -10,7 +10,6 @@ import '../styles/my_groups.css'
 export default class MyGroups extends Component {
 
   componentDidMount() {
-    // console.log("mark notification badge off")
     this.props.onBadgeOff()
   }
 
@@ -18,18 +17,20 @@ export default class MyGroups extends Component {
     const groups = this.props.groups || [];
     const groupComponents = groups.map(group => (
       <CSSTransition key={group.id} timeout={500} classNames="fade">
-        <Group {...group } current={true}/>
+        <Group {...group } activeId={groups[0].id} current={true}/>
       </CSSTransition>
     ))
     return (
       <React.Fragment>
         <NavBar page='groups' />
-        <div style={{ padding: 20 }}>
-          <Header> Your Current Groups </Header>
-          <TransitionGroup className="my-groups">
-            {groupComponents}
-          </TransitionGroup>
-        </div>
+        <Accordion>
+          <div style={{ padding: 20 }}>
+            <Header> Your Current Groups </Header>
+            <TransitionGroup className="my-groups">
+              {groupComponents}
+            </TransitionGroup>
+          </div>
+        </Accordion>
       </React.Fragment>
     )
   }

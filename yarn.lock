@@ -5222,8 +5222,12 @@ merge-deep@^3.0.2:
 
 merge-descriptors@0.0.1:
   version "0.0.1"
+<<<<<<< HEAD
+  resolved "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-0.0.1.tgz#2ff0980c924cf81d0b5d1fb601177cb8bb56c0d0"
+=======
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-0.0.1.tgz#2ff0980c924cf81d0b5d1fb601177cb8bb56c0d0"
   integrity sha1-L/CYDJJM+B0LXR+2ARd8uLtWwNA=
+>>>>>>> master
 
 merge-descriptors@1.0.1:
   version "1.0.1"

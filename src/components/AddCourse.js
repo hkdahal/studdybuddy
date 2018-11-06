@@ -39,6 +39,8 @@ export default class AddCourse extends Component{
   }
 
   onSubmit = () => {
+    this.setState({ course_id_error: this.state.course_id === "" })
+    this.setState({ class_num_error: this.state.class_number === ""})
     this.setState({ course_id_error: this.state.course_id != "SWEN-101" })
     this.setState({ class_num_error: (this.state.class_number != "4")})
     this.setState({ course_sect_error: this.state.course_sect != "05"})

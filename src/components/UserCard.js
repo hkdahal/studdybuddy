@@ -69,7 +69,7 @@ export default class UserCard extends Component {
             this.state.loading
               ? (
                 <Placeholder>
-                   <Placeholder.Header><Placeholder.Line length='long' /></Placeholder.Header>
+                   <Placeholder.Header><Placeholder.Line length='long' /><Placeholder.Line length='long' /></Placeholder.Header>
                  </Placeholder>
               )
               : (
