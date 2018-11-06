@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Dependencies
+
+### Yard
+Dependencies may be managed using the [Yarn](https://yarnpkg.com/en/docs/getting-started) depdencency manager.
+
+### npm
+They may also be managed manually using [npm](https://www.npmjs.com/).
+
+This project is dependent on:
+- ReactJS (react & react-dom)
+- NodeJS (installed with npm)
+
 ## Available Scripts
 
 In the project directory, you can run:
