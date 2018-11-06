@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Segment, Input, Form } from 'semantic-ui-react'
+import { Segment, Form, Header } from 'semantic-ui-react'
 
 import NavBar from './NavBar'
-import Group from './Group'
+import TutorClass from './TutorClass'
 
 const options = [
   { key: 'NA', text: 'Any Size', value: 'NA'},
@@ -15,15 +15,17 @@ const options = [
   { key: '7', text: '7', value: '7' },
   { key: '8', text: '8', value: '8' },
   { key: '9', text: '9', value: '9' },
-  { key: '11', text: '11', value: '11' },
-  { key: '12', text: '12', value: '12' },
-  { key: '13', text: '13', value: '13' },
-  { key: '14', text: '14', value: '14' },
-  { key: '15', text: '15', value: '15' },
+  { key: '10', text: '10', value: '10' },
 ]
 
+const classes = [
+  { key: 'NA', text: 'Choose a class...', value: 'NA'},
+  { key: 'QAWS_101', text: 'QAWS_101', value: 'QAWS_101' },
+  { key: 'QAWS_331', text: 'QAWS_331', value: 'QAWS_331' },
+  { key: 'QAWS_444', text: 'QAWS_444', value: 'QAWS_444' },
+]
 
-export default class EecomeTutor extends Component{
+export default class BecomeTutor extends Component{
   state = {
     course_id: "",
     class_number: "",
@@ -32,63 +34,99 @@ export default class EecomeTutor extends Component{
     class_num_error: false
   }
 
-  // onSubmit = () => {
-  //   this.setState({ course_id_error: this.state.course_id === "" })
-  //   this.setState({ class_num_error: this.state.class_number === ""})
-  // }
-  //
-  // onCourseIdChange = (ev, data) => {
-  //   this.setState({ course_id: data.value})
-  // }
-  //
-  // onClassNumChange = (ev, data) => {
-  //   this.setState({ class_number: data.value})
-  // }
+  onAdd(event) {
+
+    // const inputList = this.state.inputList;
+    // this.setState({
+    //   inputList: inputList.concat(<TutorClass key={inputList.length}/>)
+    // })
+
+    // element = <CardComponent data="Give a little detail about the thing's you like!"
+    // heading= "Create Your Own Card" image="./owl.jpg"/>
+    // this.setState({
+    //     change: element
+    // });
+  }
 
   render(){
-    const { value } = this.state
-        return (
-
-          <React.Fragment>
-            <NavBar page='become-tutor'/>
-            <div style={{ padding: 100}}>
-              <Segment raised>
-                <Form>
-                  <Form.Group widths='4'>
-                    <Form.Input fluid label='Course ID' placeholder='(eg: SWEN-101)'/>
-                  </Form.Group>
-                  <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 5)' />
-
-                  <Form.Checkbox label='NTID student' />
-                  <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
-                </Form>
-              </Segment>
-            </div>
-          </React.Fragment>
-
-        )
-
-
-    const InputCourseID = () => <Input focus placeholder='Course ID (eg: SWEN-101)' />
-    const InputClassNumber = () => <Input focus placeholder= 'Class number (eg: 03)' />
-
-    // export default InputExampleFocus
-    const divStyle = {
-      padding: 20
-    }
-
-    /* return (
+    // const { value } = this.state
+    return (
       <React.Fragment>
-        <NavBar page='add-course'/>
-        <div style={divStyle}>
-          <InputCourseID/>
-          <InputClassNumber/>
+        <NavBar page='become-tutor'/>
+
+        {/* <div style={{padding:50}}>
+          <Header>Tutor</Header>
+        </div> */}
+
+        <div style={{padding: 50}}>
+          {/* <Segment raised> */}
+            <Form>
+
+              <Form.Group widths='3'>
+                {/* <Form.Input placeholder="Search for a class to tutor (e.g. SWEN-101)"/> */}
+
+                <Form.Select fluid options={classes} placeholder='Choose a class...'/>
+
+                <Form.Button onclick={this.onAdd}>Add</Form.Button>
+              </Form.Group>
+
+            </Form>
+          {/* </Segment> */}
         </div>
+
+        <div style={{ padding: 50}}>
+          <Segment raised>
+            <Form>
+
+              <Header>QAWS_101</Header>
+
+              {/* <Form.Group widths='4'> */}
+              <Form.Input fluid label='Projects Done' placeholder='(e.g. HealthNet)'/>
+
+              <Form.Input fluid label='Relevant Classes' placeholder='(e.g. QAWS_444)'/>
+
+              {/* </Form.Group> */}
+
+              <Form.Group widths='6'>
+                <Form.Input fluid label='Grade Received' placeholder='(e.g. A, A-, B+, B)'/>
+              </Form.Group>
+
+              <Form.Select width='2' fluid label='Preferred Group Size' options={options} placeholder='(e.g. 3)' />
+
+              <Form.Group>
+                <Form.Button onClick={this.onSave}>Save</Form.Button>
+                <Form.Button onClick={this.onDelete}>Delete</Form.Button>
+              </Form.Group>
+            </Form>
+          </Segment>
+        </div>
+
+        <div style={{ padding: 50}}>
+          <Segment raised>
+            <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
+          </Segment>
+          
+          <Form.Checkbox label='Can you accommodate NTID students?' />    
+        </div>
+
+        <div style={{ padding: 50}}>
+
+          {/* <Form.Checkbox label='Can you accommodate NTID students?' />     */}
+                
+          <Segment raised>
+            <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
+          </Segment>
+        </div>
+
       </React.Fragment>
-      // InputCourseID,
-      // InputClassNumber
     )
-    */
+
+    // const InputCourseID = () => <Input focus placeholder='Course ID (eg: SWEN-101)' />
+    // const InputClassNumber = () => <Input focus placeholder= 'Class number (eg: 03)' />
+
+    // const divStyle = {
+    //   padding: 20
+    // }
   }
 
 }
