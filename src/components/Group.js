@@ -6,7 +6,7 @@ import UserCard from '../containers/UserCard'
 
 export default class Group extends Component {
 
-  state = {activeIndex : 0 }
+  state = {activeIndex : 1 }
 
   onLeaveGroup = () => {
     this.props.onLeaveGroup(this.props.id)
