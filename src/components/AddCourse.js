@@ -16,6 +16,7 @@ const options = [
   { key: '7', text: '7', value: '7' },
   { key: '8', text: '8', value: '8' },
   { key: '9', text: '9', value: '9' },
+  { key: '10', text: '10', value: '10' },
   { key: '11', text: '11', value: '11' },
   { key: '12', text: '12', value: '12' },
   { key: '13', text: '13', value: '13' },
@@ -33,20 +34,21 @@ export default class AddCourse extends Component{
     group_size: "",
     course_id_error: false,
     class_num_error: false,
+    course_sect_error: false,
     modalOpen: false
   }
 
   onSubmit = () => {
     this.setState({ course_id_error: this.state.course_id != "SWEN-101" })
-    this.setState({ class_num_error: this.state.class_number != "4"})
+    this.setState({ class_num_error: (this.state.class_number != "4")})
+    this.setState({ course_sect_error: this.state.course_sect != "05"})
 
 
-    if(this.state.course_id === "SWEN-101" && this.state.class_number === "4"){
+    if(this.state.course_id === "SWEN-101" && this.state.class_number === "4" && this.state.course_sect === "05"){
       // upon clicking submit
       // conirm/acknowledge the submission for user
       // inform mainpage of new class to display potential buddys
       this.setState({modalOpen: true})
-      console.log("I am here somehow")
       this.props.onAddCourse()
     }
   }
@@ -59,8 +61,11 @@ export default class AddCourse extends Component{
     this.setState({ class_number: data.value})
   }
 
+  onCourseSectionChange = (ev, data) => {
+    this.setState({course_sect: data.value})
+  }
+
   hideModal = () => {
-    this.course_id_ref.value = ""
     this.setState({ modalOpen: false })
 
   }
@@ -78,7 +83,7 @@ export default class AddCourse extends Component{
                 <Form>
                   <Form.Group widths='4'>
                     <Form.Input fluid label='Course ID' placeholder='(eg: SWEN-101)' onChange={this.onCourseIdChange} error={this.state.course_id_error}/>
-                    <Form.Input fluid label='Class number' placeholder='(eg: 04)' />
+                    <Form.Input fluid label='Course Section' placeholder='(eg: 05)' onChange={this.onCourseSectionChange} error={this.state.course_sect_error} />
                   </Form.Group>
                   <Form.Select width='2' fluid label='Ideal Group size' options={options} placeholder='(eg: 4)' onChange={this.onClassNumChange} error={this.state.class_num_error}/>
 
@@ -91,18 +96,15 @@ export default class AddCourse extends Component{
                     <Modal.Content>
                       <Modal.Description>
                         <Link to='/'> <Button>OK</Button> </Link>
-
                       </Modal.Description>
                     </Modal.Content>
                   </Modal>
-                  {/*}<Form.Button onClick={this.onSubmit}>Submit</Form.Button>*/}
                 </Form>
               </Segment>
             </div>
           </React.Fragment>
 
         )
-
 
     const InputCourseID = () => <Input focus placeholder='Course ID (eg: SWEN-101)' />
     const InputClassNumber = () => <Input focus placeholder= 'Class number (eg: 03)' />
@@ -112,18 +114,6 @@ export default class AddCourse extends Component{
       padding: 20
     }
 
-    /* return (
-      <React.Fragment>
-        <NavBar page='add-course'/>
-        <div style={divStyle}>
-          <InputCourseID/>
-          <InputClassNumber/>
-        </div>
-      </React.Fragment>
-      // InputCourseID,
-      // InputClassNumber
-    )
-    */
   }
 
 }
