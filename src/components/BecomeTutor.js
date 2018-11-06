@@ -133,7 +133,7 @@ export default class BecomeTutor extends Component{
           </Segment>
           
           <Form.Checkbox label='Can you accommodate NTID students?' />    
-        </div> */}
+        </div>
 
          <div style={{ padding: 50}}>     
           <Segment raised>
