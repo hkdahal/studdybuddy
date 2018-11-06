@@ -49,10 +49,9 @@ export default class BecomeTutor extends Component{
   render(){
     const classComponents = this.state.currentClasses.map(cl => {
       return (
-        <div style={{ padding: 50}} key={cl.key}>
+        <div style={{ padding: 20}} key={cl.key}>
           <Segment raised>
             <Form>
-
               <Header>{cl.text}</Header>
 
               <Form.Input fluid label='Projects Done' placeholder='(e.g. HealthNet)'/>
@@ -77,35 +76,37 @@ export default class BecomeTutor extends Component{
     return (
       <React.Fragment>
         <NavBar page='become-tutor'/>
-        <div style={{padding: 50}}>
-            <Form>
-              <Grid>
-                <Grid.Column width={15}>
-                  <Form.Select onChange={this.listenToOnChange} fluid options={Object.values(this.state.classes)} placeholder='Choose a class...'/>
-                </Grid.Column>
-                <Grid.Column width={1}>
-                  <Form.Button onClick={this.onAdd}>Add</Form.Button>
-                </Grid.Column>
-              </Grid>
-            </Form>
-        </div>
+        <div style={{padding: 20}}>
+            <Header>Become a Tutor</Header>
+            <Segment>
+              <Form>
+                <Grid>
+                  <Grid.Column width={14}>
+                    <Form.Select onChange={this.listenToOnChange} fluid options={Object.values(this.state.classes)} placeholder='Choose a class...'/>
+                  </Grid.Column>
+                  <Grid.Column width={1}>
+                    <Form.Button onClick={this.onAdd}>Add</Form.Button>
+                  </Grid.Column>
+                </Grid>
+              </Form>
 
-        {classComponents}
+              {classComponents}
 
-        <div style={{ padding: 50}}>
-          <Segment raised>
-            <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
-          </Segment>
+              <div style={{ padding: 50}}>
+                <Segment raised>
+                  <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
+                </Segment>
 
-          <Form.Checkbox label='Can you accommodate NTID students?' />
-        </div>
+                <Form.Checkbox label='Can you accommodate NTID students?' />
+              </div>
 
-         <div style={{ padding: 50}}>
-          <Segment raised>
-            <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
-          </Segment>
-        </div>
-
+               <div style={{ padding: 50}}>
+                <Segment raised>
+                  <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
+                </Segment>
+              </div>
+            </Segment>
+          </div>
       </React.Fragment>
     )
   }

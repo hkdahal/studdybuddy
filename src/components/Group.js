@@ -25,7 +25,7 @@ export default class Group extends Component {
     const { activeIndex } = this.state
     const users = Object.values(this.props.users) || []
     const userCards = users.map(user => (
-      <UserCard {...user} group={name} groupId={id} key={user.id} currentGroup={current || false} />
+      <UserCard {...user } group={name} groupId={id} key={user.id} currentGroup={current || false} />
     ))
     return (
       <Segment raised>

@@ -7,7 +7,9 @@ export default class About extends Component {
     return (
       <React.Fragment>
         <NavBar page='about'/>
-        <Header>About</Header>
+        <div style={{ padding: 20}}>
+          <Header>About</Header>
+        </div>
       </React.Fragment>
     )
   }

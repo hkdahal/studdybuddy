@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavBar from '../containers/NavBar'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { Accordion, Header, Icon } from 'semantic-ui-react'
+import { Accordion, Header } from 'semantic-ui-react'
 
 import Group from './Group'
 

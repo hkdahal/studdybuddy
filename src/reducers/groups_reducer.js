@@ -45,7 +45,7 @@ const initialState = {
       15: { id: 15, name: 'Matt Bjork', bio: 'I wanna teach my son John weaving someday!', details: 'Weave Bio', status: NOT_DECIDED, image: 'matthew.png' },
       114: { id: 114, name: 'James Ty', bio: 'Into Leo-Nardy stuffs', details: 'Weave Engineering', status: NOT_DECIDED, image: 'daniel.jpg' },
       115: { id: 115, name: 'Dave Bjork', bio: 'I wanna teach my son John weaving someday!', details: 'Weave Bio', status: NOT_DECIDED, image: 'christian.jpg' },
-      6: { id: 215, name: 'Elliot Bjork', bio: 'I wanna teach my son John weaving someday!', details: 'Weave Bio', status: DISLIKED, image: 'elliot.jpg' }
+      215: { id: 215, name: 'Elliot Bjork', bio: 'I wanna teach my son John weaving someday!', details: 'Weave Bio', status: DISLIKED, image: 'elliot.jpg' }
     }}
   },
   recentlyJoined: 0,
@@ -67,6 +67,7 @@ const ACTION_HANDLERS = {
       if (user.status === LIKED) {
         currGroupUsers[user.id] = {...user, status: CONFIRMED }
       }
+      return null
     })
     delete ongoingGroups[groupId]
     return {
