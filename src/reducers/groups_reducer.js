@@ -48,14 +48,14 @@ const initialState = {
       6: { id: 215, name: 'Elliot Bjork', bio: 'I wanna teach my son John weaving someday!', details: 'Weave Bio', status: DISLIKED, image: 'elliot.jpg' }
     }}
   },
-  notifyJoined: false,
+  recentlyJoined: 0,
 }
 
 const ACTION_HANDLERS = {
   [BADGE_OFF]: state => {
     return {
       ...state,
-      notifyJoined: false
+      recentlyJoined: 0
     }
   },
   [JOIN_GROUP] : (state, action) => {
@@ -81,7 +81,8 @@ const ACTION_HANDLERS = {
       },
       ongoing: {
         ...ongoingGroups
-      }
+      },
+      recentlyJoined: state.recentlyJoined + 1
     }
   },
   [LEAVE_GROUP]: (state, action) => {
