@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Form, Header, Grid } from 'semantic-ui-react'
 
 import NavBar from './NavBar'
-import TutorClass from './TutorClass'
+// import TutorClass from './TutorClass'
 
 const options = [
   { key: 'NA', text: 'Any Size', value: 'NA'},
@@ -80,7 +80,7 @@ export default class BecomeTutor extends Component{
                 <Form.Input fluid label='Grade Received' placeholder='(e.g. A, A-, B+, B)'/>
               </Form.Group>
 
-              <Form.Select width='2' fluid label='Preferred Group Size' options={options} placeholder='(e.g. 3)' />
+              <Form.Select width='2' fluid label='Ideal Group Size' options={options} placeholder='(e.g. 3)' />
 
               <Form.Group>
                 <Form.Button onClick={this.onSave}>Save</Form.Button>
@@ -111,15 +111,6 @@ export default class BecomeTutor extends Component{
                   <Form.Button onClick={this.onAdd}>Add</Form.Button>
                 </Grid.Column>
               </Grid>
-
-              {/* <Form.Group>
-                {/* <Form.Input placeholder="Search for a class to tutor (e.g. SWEN-101)"/> */}
-
-                
-
-                
-              {/* </Form.Group> */}
-
             </Form>
           {/* </Segment> */}
         </div>
@@ -129,6 +120,11 @@ export default class BecomeTutor extends Component{
 
         <div style={{ padding: 50}}>
           <Segment raised>
+            {/* <Form.Input fluid label='Current Status' placeholder='e.g. 3.5, 3.6, 3.7'/> */}
+            <Form.Input fluid label='Interests'/>
+            <Form.Input fluid label='Hobbies'/>
+            <Form.Input fluid label='Phone Number' placeholder='(xxx) xxx - xxxx'/>
+            <Form.Input fluid label='Email' placeholder='e.g. johnappleseed@rit.edu'/>
             <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
           </Segment>
           
