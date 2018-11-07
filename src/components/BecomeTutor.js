@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Segment, Form, Header, Grid } from 'semantic-ui-react'
 
+<<<<<<< HEAD
 import NavBar from '../containers/NavBar'
+=======
+import NavBar from './NavBar'
+// import TutorClass from './TutorClass'
+>>>>>>> ec581b5b2d3b7d21ea266000624b5b89902a8544
 
 const options = [
   { key: 'NA', text: 'Any Size', value: 'NA'},
@@ -62,7 +67,7 @@ export default class BecomeTutor extends Component{
                 <Form.Input fluid label='Grade Received' placeholder='(e.g. A, A-, B+, B)'/>
               </Form.Group>
 
-              <Form.Select width='2' fluid label='Preferred Group Size' options={options} placeholder='(e.g. 3)' />
+              <Form.Select width='2' fluid label='Ideal Group Size' options={options} placeholder='(e.g. 3)' />
 
               <Form.Group>
                 <Form.Button onClick={this.onSave}>Save</Form.Button>
@@ -94,6 +99,10 @@ export default class BecomeTutor extends Component{
 
               <div style={{ padding: 50}}>
                 <Segment raised>
+                  <Form.Input fluid label='Interests'/>
+                  <Form.Input fluid label='Hobbies'/>
+                  <Form.Input fluid label='Phone Number' placeholder='(xxx) xxx - xxxx'/>
+                  <Form.Input fluid label='Email' placeholder='e.g. johnappleseed@rit.edu'/>
                   <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
                 </Segment>
 
@@ -107,6 +116,7 @@ export default class BecomeTutor extends Component{
               </div>
             </Segment>
           </div>
+
       </React.Fragment>
     )
   }
