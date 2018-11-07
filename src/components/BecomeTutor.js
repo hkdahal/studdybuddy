@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { Segment, Form, Header, Grid } from 'semantic-ui-react'
 
-<<<<<<< HEAD
 import NavBar from '../containers/NavBar'
-=======
-import NavBar from './NavBar'
-// import TutorClass from './TutorClass'
->>>>>>> ec581b5b2d3b7d21ea266000624b5b89902a8544
 
 const options = [
   { key: 'NA', text: 'Any Size', value: 'NA'},
