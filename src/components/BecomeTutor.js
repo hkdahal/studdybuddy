@@ -31,7 +31,8 @@ export default class BecomeTutor extends Component{
       QAWS_444: { key: 'QAWS_444', text: 'QAWS_444', value: 'QAWS_444' },
     },
     selectedClass: undefined,
-    currentClasses: []
+    currentClasses: [],
+    modal_open: false,
   }
 
   onAdd = (ev, data) => {
@@ -76,42 +77,45 @@ export default class BecomeTutor extends Component{
     return (
       <React.Fragment>
         <NavBar page='become-tutor'/>
+        
         <div style={{padding: 20}}>
-            <Header>Become a Tutor</Header>
-            <Segment>
-              <Form>
-                <Grid>
-                  <Grid.Column width={14}>
-                    <Form.Select onChange={this.listenToOnChange} fluid options={Object.values(this.state.classes)} placeholder='Choose a class...'/>
-                  </Grid.Column>
-                  <Grid.Column width={1}>
-                    <Form.Button onClick={this.onAdd}>Add</Form.Button>
-                  </Grid.Column>
-                </Grid>
-              </Form>
+          <Header>Become a Tutor</Header>
+        </div>
+        
+        <div style={{padding: 20}}>
+          <Segment raised>
+            <Form>
+              <Grid>
+                <Grid.Column width={15}>
+                  <Form.Select onChange={this.listenToOnChange} fluid options={Object.values(this.state.classes)} placeholder='Choose a class...'/>
+                </Grid.Column>
+                <Grid.Column width={1}>
+                  <Form.Button onClick={this.onAdd}>Add</Form.Button>
+                </Grid.Column>
+              </Grid>
+            </Form>
+          </Segment>
+        </div>
 
-              {classComponents}
+        {classComponents}
 
-              <div style={{ padding: 50}}>
-                <Segment raised>
-                  <Form.Input fluid label='Interests'/>
-                  <Form.Input fluid label='Hobbies'/>
-                  <Form.Input fluid label='Phone Number' placeholder='(xxx) xxx - xxxx'/>
-                  <Form.Input fluid label='Email' placeholder='e.g. johnappleseed@rit.edu'/>
-                  <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
-                </Segment>
+        <div style={{padding: 20}}>
+          <Segment raised>
+            <Form.Input fluid label='Interests'/>
+            <Form.Input fluid label='Hobbies'/>
+            <Form.Input fluid label='Phone Number' placeholder='(xxx) xxx - xxxx'/>
+            <Form.Input fluid label='Email' placeholder='e.g. johnappleseed@rit.edu'/>
+            <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
+          </Segment>
 
-                <Form.Checkbox label='Can you accommodate NTID students?' />
-              </div>
+          <Form.Checkbox label='Can you accommodate NTID students?' />
+        </div>
 
-               <div style={{ padding: 50}}>
-                <Segment raised>
-                  <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
-                </Segment>
-              </div>
-            </Segment>
-          </div>
-
+        <div style={{padding: 20}}>
+          <Segment raised>
+            <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
+          </Segment>
+        </div>
       </React.Fragment>
     )
   }
