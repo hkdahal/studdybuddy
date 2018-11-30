@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Segment, Form, Header, Grid } from 'semantic-ui-react'
+import { Segment, Form, Header, Grid, Icon, Popup, Input, Select, Modal, Button } from 'semantic-ui-react'
+import { Link } from "react-router-dom"
 
 import NavBar from '../containers/NavBar'
 
@@ -17,13 +18,15 @@ const options = [
   { key: '10', text: '10', value: '10' },
 ]
 
+const gpaOptions = [
+  { key: 'A', text: 'A', value: 'A' },
+  { key: 'B', text: 'B', value: 'B' },
+  { key: 'C', text: 'C', value: 'C' },
+  { key: 'D', text: 'D', value: 'D' },
+]
+
 export default class BecomeTutor extends Component{
   state = {
-    course_id: "",
-    class_number: "",
-    group_size: "",
-    course_id_error: false,
-    class_num_error: false,
     classes: {
       NA: { key: 'NA', text: 'Choose a class...', value: 'NA'},
       QAWS_101: { key: 'QAWS_101', text: 'QAWS_101', value: 'QAWS_101' },
@@ -31,84 +34,165 @@ export default class BecomeTutor extends Component{
       QAWS_444: { key: 'QAWS_444', text: 'QAWS_444', value: 'QAWS_444' },
     },
     selectedClass: undefined,
-    currentClasses: []
+    currentClasses: [],
+    currentGPA: "",
+    current_gpa_error: false,
+    modalOpen: false
+  }
+
+  onDelete = cl => {
+    const newCurrentClass = this.state.currentClasses.filter(d => d.key !== cl)
+    const updatedClasses = {
+      ...this.state.classes,
+      [cl]: {
+        ...this.state.classes[cl],
+        disabled: false
+      }
+    }
+    this.setState({ currentClasses: [...newCurrentClass], classes: updatedClasses })
   }
 
   onAdd = (ev, data) => {
-    console.log(data);
-    this.setState({ currentClasses: [...this.state.currentClasses, this.state.classes[this.state.selectedClass]] })
+    const { classes, currentClasses, selectedClass } = this.state
+    if (this.isAlreadySelected(selectedClass)) {
+      console.log("class already selected")
+    } else {
+      const updatedClasses = {
+        ...classes,
+        [selectedClass]: {
+          ...classes[selectedClass],
+          disabled: true
+        }
+      }
+      this.setState({ currentClasses: [...currentClasses, classes[selectedClass]], classes:  updatedClasses})
+    }
+  }
+
+  onCurrentGPAUpdate = (e, data) => {
+    this.setState({ currentGPA: data.value })
   }
 
   listenToOnChange = (e, data) => {
-    console.log(data.value)
     if (data.value !== "NA") {
       this.setState({ selectedClass: data.value })
     }
   }
 
+  isAlreadySelected = selectedClass => {
+    let classAlreadySelected = false
+    this.state.currentClasses.forEach(cl => {
+      if (cl.key === selectedClass) {
+        classAlreadySelected = true
+      }
+    })
+    return classAlreadySelected
+  }
+
+  onSubmit = () => {
+    if (this.state.currentGPA === "3.5") {
+      this.setState({modalOpen: true})
+      console.log("valid ")
+    } else {
+      this.setState({ current_gpa_error: true})
+    }
+  }
+
+  hideModal = () => {
+    this.setState({ modalOpen: false })
+  }
+
   render(){
-    const classComponents = this.state.currentClasses.map(cl => {
+    const classComponents = this.state.currentClasses.map((cl, k) => {
+      if (typeof cl === "undefined") {
+        return null;
+      }
       return (
         <div style={{ padding: 20}} key={cl.key}>
-          <Segment raised>
-            <Form>
-              <Header>{cl.text}</Header>
+          <Grid>
+            <Grid.Column width={8}>
+              <Segment>
+                <Form>
+                  <h2>{cl.text}<Icon link onClick={() => this.onDelete(cl.key)} color='red' name="trash alternate" /></h2>
 
-              <Form.Input fluid label='Projects Done' placeholder='(e.g. HealthNet)'/>
+                  <Form.Input width={14} fluid label='Projects Done' placeholder='(e.g. HealthNet)'/>
 
-              <Form.Input fluid label='Relevant Classes' placeholder='(e.g. QAWS_444)'/>
+                  <Form.Input width={14} fluid label='Relevant Classes' placeholder='(e.g. QAWS_444)'/>
 
-              <Form.Group widths='6'>
-                <Form.Input fluid label='Grade Received' placeholder='(e.g. A, A-, B+, B)'/>
-              </Form.Group>
-
-              <Form.Select width='2' fluid label='Ideal Group Size' options={options} placeholder='(e.g. 3)' />
-
-              <Form.Group>
-                <Form.Button onClick={this.onSave}>Save</Form.Button>
-                <Form.Button onClick={this.onDelete}>Delete</Form.Button>
-              </Form.Group>
-            </Form>
-          </Segment>
+                  <Form.Field width={5} required>
+                    <label>Grade Received</label>
+                    <Select width='5' fluid label='' options={gpaOptions} placeholder='(e.g. A, B)' />
+                  </Form.Field>
+                  <Form.Select width='5' fluid label='Ideal Group Size' options={options} placeholder='(e.g. 3)' />
+                </Form>
+              </Segment>
+            </Grid.Column>
+          </Grid>
         </div>
       )
     })
+
+    // const classesTutoring =
     return (
       <React.Fragment>
         <NavBar page='become-tutor'/>
         <div style={{padding: 20}}>
             <Header>Become a Tutor</Header>
             <Segment>
-              <Form>
-                <Grid>
-                  <Grid.Column width={14}>
-                    <Form.Select onChange={this.listenToOnChange} fluid options={Object.values(this.state.classes)} placeholder='Choose a class...'/>
-                  </Grid.Column>
-                  <Grid.Column width={1}>
-                    <Form.Button onClick={this.onAdd}>Add</Form.Button>
-                  </Grid.Column>
-                </Grid>
-              </Form>
+                <Form>
+                  <Grid>
+                    <Grid.Column width={5}>
+                      <Form.Select onChange={this.listenToOnChange} fluid options={Object.values(this.state.classes)} placeholder='Choose a class...'/>
+                    </Grid.Column>
+                    <Grid.Column width={1}>
+                      <Form.Button onClick={this.onAdd}>Add</Form.Button>
+                    </Grid.Column>
+                  </Grid>
+                </Form>
 
-              {classComponents}
+                {classComponents}
 
-              <div style={{ padding: 50}}>
-                <Segment raised>
-                  <Form.Input fluid label='Interests'/>
-                  <Form.Input fluid label='Hobbies'/>
-                  <Form.Input fluid label='Phone Number' placeholder='(xxx) xxx - xxxx'/>
-                  <Form.Input fluid label='Email' placeholder='e.g. johnappleseed@rit.edu'/>
-                  <Form.Input fluid label='Current GPA' placeholder='e.g. 3.5, 3.6, 3.7'/>
-                </Segment>
+                <div style={{ padding: 20}}>
+                    <Form>
+                      <Form.Field width={4}>
+                        <Form.Input fluid label='Interests'/>
+                      </Form.Field>
 
-                <Form.Checkbox label='Can you accommodate NTID students?' />
-              </div>
+                      <Form.Field width={4} required error={this.state.current_gpa_error}>
+                        <label>Current GPA</label>
+                        <Input placeholder='e.g. 3.5' onChange={this.onCurrentGPAUpdate}/>
+                      </Form.Field>
+                      <Form.Field>
+                        <Form.Checkbox label='Can you accommodate NTID students?' />
+                      </Form.Field>
 
-               <div style={{ padding: 50}}>
-                <Segment raised>
-                  <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
-                </Segment>
-              </div>
+                      <Form.Field>
+                        {
+                          this.state.currentClasses.length === 0
+                          ? <Popup
+                              trigger={<Form.Button basic color='red' >Submit</Form.Button>}
+                              content='Please add at least one class before submitting!'
+                              hideOnScroll
+                            />
+                          : <Modal trigger={<Form.Button color='green' onClick={this.onSubmit} >Submit</Form.Button>}
+                              open={this.state.modalOpen}
+                              onClose={this.hideModal}>
+                              <Modal.Header>You're a tutor now!</Modal.Header>
+                              <Modal.Content>
+                                <Modal.Description>
+                                  <h3>You are marked as a tutor for following courses:</h3>
+                                  {this.state.currentClasses.map(cl => {
+                                    return <h4 key={cl.key}>- {cl.key}</h4>
+                                  })}
+                                  <Link to='/'> <Button>OK</Button> </Link>
+                                </Modal.Description>
+                              </Modal.Content>
+                            </Modal>
+
+                        }
+
+                      </Form.Field>
+                    </Form>
+                </div>
             </Segment>
           </div>
 
