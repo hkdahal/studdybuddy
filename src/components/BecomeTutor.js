@@ -54,6 +54,9 @@ export default class BecomeTutor extends Component{
 
   onAdd = (ev, data) => {
     const { classes, currentClasses, selectedClass } = this.state
+    if (typeof selectedClass === "undefined") {
+      return
+    }
     if (this.isAlreadySelected(selectedClass)) {
       console.log("class already selected")
     } else {
@@ -103,9 +106,6 @@ export default class BecomeTutor extends Component{
 
   render(){
     const classComponents = this.state.currentClasses.map((cl, k) => {
-      if (typeof cl === "undefined") {
-        return null;
-      }
       return (
         <div style={{ padding: 20}} key={cl.key}>
           <Grid>
