@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [React Semantic UI](https://react.semantic-ui.com/).
 
-# Note to the IT team (End-users)
+## Note to the IT team (End-users)
 There are two ways to view this project:
 - It is hosted live [here](https://studdybuddy.meroapps.com).
 - You can compile and run it yourself. You'll need to download all the required
